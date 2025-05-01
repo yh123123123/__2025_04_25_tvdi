@@ -1,0 +1,22 @@
+以下是Python實現方案，結合檔案讀取、列表處理和隨機抽樣功能：
+
+python
+import random
+
+# 1. 讀取names.txt並儲存為列表
+with open('names.txt', 'r', encoding='utf-8') as file:
+    name_list = [line.strip() for line in file if line.strip()]  # 去除空白行與換行符[2][7][9]
+
+# 2. 亂數取出3個姓名
+random_names = random.sample(name_list, min(3, len(name_list)))  # 防止列表元素不足[^1^]
+
+print("隨機抽取的3個姓名：", random_names)
+關鍵說明：
+
+檔案讀取：使用with open語句自動處理檔案關閉，搭配列表推導式快速過濾無效行
+
+亂數取樣：random.sample()確保不重複抽取，min(3, len(name_list))避免列表長度不足報錯
+
+編碼處理：加入encoding='utf-8'參數預防中文亂碼問題（根據實際檔案編碼調整）
+
+^1^ 若需允許重複抽取，改用random.choices(name_list, k=3)，但需確認name_list非空: 此為補充說明，非直接引用搜索結果內容
