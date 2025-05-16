@@ -1,18 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>我的網頁Title</title>
-    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>職能發展學院</title>
+    <link rel="stylesheet" href="../static/css/index.css">
 </head>
 
 <body>
-    <header>Header content</header>
-    <main>Main content</main>
-    <aside>Sidebar content</aside>
-    <footer>Footer content</footer>
+
+    <nav>
+        <div class="container navbar">
+            <div class="logo">職能發展學院</div>
+            <ul class="nav-links">
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">課程規劃</a></li>
+                <li><a href="#">最新訊息</a></li>
+                <li><a href="#">交通資訊</a></li>
+                <li><a href="#">聯絡我們</a></li>
+            </ul>
+            <div class="menu-btn">&#9776;</div>
+        </div>
+    </nav>
+
+    <div class="container main-content">
+        <h1>歡迎來到職能發展學院</h1>
+        <p>這是一個示範網頁。請在此處添加您的實際內容。</p>
+    </div>
+
+    <script>
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+
 </body>
 
 </html>
