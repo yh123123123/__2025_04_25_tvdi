@@ -49,12 +49,14 @@ nav {
 
 .nav-links a {
     text-decoration: none;
-    color: #333;
+    color: #333333;
     padding: 5px 10px;
 }
 
 .nav-links a:hover {
     background-color: #ccc;
+    color: #0f4cf5;
+
 }
 
 /* Mobile Menu Button (Hidden on Desktop) */
