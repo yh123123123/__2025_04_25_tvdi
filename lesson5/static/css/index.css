@@ -1,0 +1,106 @@
+/* Basic Reset and General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f0f0f0;
+    /* Light gray background */
+}
+
+.container {
+    max-width: 1200px;
+    /* Adjust as needed */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+
+/* Navigation Bar Styles */
+nav {
+    background-color: #ddd;
+    /* Light gray navigation bar */
+    padding: 10px 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333333;
+    padding: 5px 10px;
+}
+
+.nav-links a:hover {
+    background-color: #ccc;
+    color: #0f4cf5;
+
+}
+
+/* Mobile Menu Button (Hidden on Desktop) */
+.menu-btn {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5em;
+}
+
+
+/* Mobile Styles (using Media Queries) */
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none;
+        /* Hide nav links on mobile */
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        /* Adjust based on navbar height */
+        right: 0;
+        background-color: #ddd;
+        width: 150px;
+        text-align: center;
+        box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-links.active {
+        display: flex;
+        /* Show nav links when menu is active */
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
+
+    .menu-btn {
+        display: block;
+        /* Show menu button on mobile */
+    }
+}
+
+/* Main Content Styles (Example) */
+.main-content {
+    background-color: #fff;
+    margin-top: 20px;
+    padding: 20px;
+}
