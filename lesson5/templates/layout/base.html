@@ -5,20 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{%block title%} 職能發展學院 {%endblock%}</title>
-    <link rel="stylesheet" href="../static/css/index.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/base.css')}}">
 </head>
 
 <body>
-
     <nav>
         <div class="container navbar">
-            <div class="logo">職能發展學院</div>
+            <div class="logo"><a href="{{ url_for('index') }}">職能發展學院</a></div>
             <ul class="nav-links">
-                <li><a href="#">HOME</a></li>
-                <li><a href="#">課程規劃</a></li>
-                <li><a href="#">最新訊息</a></li>
-                <li><a href="#">交通資訊</a></li>
-                <li><a href="#">聯絡我們</a></li>
+                <li><a href="{{ url_for('index') }}">HOME</a></li>
+                <li><a href="{{ url_for('classes') }}">課程規劃</a></li>
+                <li><a href="{{ url_for('new') }}">最新訊息</a></li>
+                <li><a href="{{ url_for('traffic') }}">交通資訊</a></li>
+                <li><a href="{{ url_for('contact') }}">聯絡我們</a></li>
             </ul>
             <div class="menu-btn">&#9776;</div>
         </div>

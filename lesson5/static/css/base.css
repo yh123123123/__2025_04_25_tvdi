@@ -38,6 +38,15 @@ nav {
     font-weight: bold;
 }
 
+.logo a {
+    text-decoration: none;
+}
+
+.logo a:hover {
+    text-decoration: none;
+}
+
+
 .nav-links {
     list-style: none;
     display: flex;
