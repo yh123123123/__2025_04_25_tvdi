@@ -7,6 +7,10 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+@app.route("/classes")
+def classes():
+    return render_template("classes.html")
+
 @app.route("/user")
 def user():
     return "<h1>Hello, World!</h1><p>02頁</p>"

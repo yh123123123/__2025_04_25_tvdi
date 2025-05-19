@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>職能發展學院</title>
+    <title>{%block title%} 職能發展學院 {%endblock%}</title>
     <link rel="stylesheet" href="../static/css/index.css">
 </head>
 
@@ -25,8 +25,10 @@
     </nav>
 
     <div class="container main-content">
+        {%block main%}
         <h1>歡迎來到職能發展學院</h1>
         <p>這是一個示範網頁。請在此處添加您的實際內容。</p>
+        {%endblock%}
     </div>
 
     <footer>
