@@ -62,7 +62,7 @@ nav {
 
 /* 頁尾 Footer */
 footer {
-    background-color: #f0f8ff;
+    background-color: #AFD1E2;
     /* A light blue background, adjust as needed */
     padding: 20px;
     color: #333;
@@ -84,7 +84,7 @@ footer {
 }
 
 .footer-left img {
-    width: 50px;
+    width: 120px;
     /* Adjust the size of your logo */
     height: auto;
     margin-right: 10px;
@@ -139,6 +139,15 @@ footer {
     /* Adjust the size of your app store badges */
     height: auto;
     margin: 5px 0;
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+    /* Add a subtle top border */
 }
 
 /* Mobile Menu Button (Hidden on Desktop) */
