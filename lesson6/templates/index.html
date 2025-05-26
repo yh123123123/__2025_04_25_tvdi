@@ -3,7 +3,28 @@
 職能發展學院-首頁
 {% endblock %}
 
-{%block main%}
-<h1>{{self.title()}}</h1>
+
+{% block link %}
 {{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+{% endblock %}
+
+
+
+
+
+{%block main%}
+<section class="event-section">
+    <h1 class="event-main-title">雙北世界壯年運動會</h1>
+    <p class="event-subtitle">2025-5-17~30和世界挑一場</p>
+    <div class="event-card-container">
+        <article class="event-card">
+            <div class="event-tag">台北場</div>
+            <img src="{{url_for('static', filename='images/banner1.png')}}" alt="自行車競技示意圖" class="event-image">
+            <div class="event-card-content">
+                <h2 class="event-card-title">自行車競技</h2>
+            </div>
+        </article>
+    </div>
+</section>
 {%endblock%}
