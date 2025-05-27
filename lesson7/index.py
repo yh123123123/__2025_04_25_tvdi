@@ -26,6 +26,11 @@ def new():
     try:
         conn=psycopg2.connect(conn_string)
         #raise Exception("出現錯誤")
+        with conn.cursor() as cur:
+            sql="SELECT * FROM 最新訊息"
+            cur.execute(sql)
+            # 取得所有資料
+            rows=cur.fetchall()
         print("連線成功")
     except OperationalError as e:
         print("連線失敗")
@@ -34,7 +39,7 @@ def new():
     except:
         return render_template("error.html",error_message="不知名錯誤"),500
     conn.close()
-    return render_template("new.html")
+    return render_template("new.html",rows=rows)
 
 @app.route("/contact")
 def contact():
