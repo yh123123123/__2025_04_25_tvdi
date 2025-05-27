@@ -1,0 +1,448 @@
+/* 基本重設和字體設定 */
+body {
+    margin: 0;
+    font-family: sans-serif;
+    /* 使用通用無襯線字體 */
+    background-color: #FFFFFF;
+    /* 假設父層背景為白色，可依實際情況調整 */
+    color: #333;
+    /* 基本文字顏色 */
+}
+
+/* 整體區塊 (homes-for-you-section) */
+.homes-for-you-section {
+    background-color: #F8F9FA;
+    /* 淺灰色背景 */
+    padding: 60px 20px;
+    /* 上下邊距 60px，左右隨 RWD 調整，初始給 20px */
+    max-width: 1140px;
+    /* 最大寬度 */
+    margin: 0 auto;
+    /* 水平置中 */
+}
+
+/* 標題區域 (homes-for-you-section__header) */
+.homes-for-you-section__header {
+    text-align: center;
+    /* 標題置中 */
+    margin-bottom: 40px;
+    /* 標題與輪播區塊的間距 */
+}
+
+/* 主標題 (homes-for-you-section__title) */
+.homes-for-you-section__title {
+    font-size: 2.5rem;
+    /* 字體較大 */
+    font-weight: bold;
+    /* 加粗 */
+    color: #343A40;
+    /* 深灰色 */
+    margin: 0 0 10px 0;
+    /* 與副標題的間距 */
+}
+
+/* 副標題 (homes-for-you-section__subtitle) */
+.homes-for-you-section__subtitle {
+    font-size: 1rem;
+    /* 字體較小 */
+    color: #6C757D;
+    /* 灰色 */
+    margin: 0;
+}
+
+/* 輪播容器 (homes-for-you-section__carousel-wrapper) */
+.homes-for-you-section__carousel-wrapper {
+    position: relative;
+    /* 相對定位，以便絕對定位導航箭頭 */
+    margin: 0 -15px;
+    /* 抵銷卡片間距造成的額外空間，讓箭頭能貼近邊緣 */
+}
+
+/* 輪播軌道容器 (homes-for-you-section__carousel-track-container) */
+.homes-for-you-section__carousel-track-container {
+    overflow: hidden;
+    /* 隱藏超出範圍的卡片 */
+}
+
+
+/* 輪播軌道 (homes-for-you-section__carousel-track) */
+.homes-for-you-section__carousel-track {
+    display: flex;
+    /* 使用 Flexbox 排列房源卡片 */
+    transition: transform 0.5s ease-in-out;
+    /* 輪播動畫效果 */
+    gap: 30px;
+    /* 卡片間的固定間距，同 property-card 的 margin */
+    padding: 0 15px;
+    /* 配合 wrapper 的負 margin，確保第一張和最後一張卡片內容不被切到 */
+}
+
+/* 房源卡片 (property-card) */
+.property-card {
+    flex: 0 0 calc(100% / 3 - (30px * 2 / 3));
+    /* 基本設定顯示3張卡片，並計算間距 */
+    min-width: 0;
+    /* 防止 flex item 在空間不足時無法縮小 */
+    box-sizing: border-box;
+}
+
+
+/* 卡片容器 (property-card__container) */
+.property-card__container {
+    background-color: #FFFFFF;
+    /* 背景色：白色 */
+    border-radius: 8px;
+    /* 圓角 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* 陰影 */
+    overflow: hidden;
+    /* 確保圖片圓角生效 */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* 使卡片等高 */
+}
+
+/* 圖片區域 (property-card__image-wrapper) */
+.property-card__image-wrapper {
+    position: relative;
+    /* 相對定位，以便放置標籤 */
+}
+
+.property-card__image-wrapper img {
+    display: block;
+    /* 去除圖片底部多餘空間 */
+    width: 100%;
+    height: 230px;
+    /* 固定圖片高度 */
+    object-fit: cover;
+    /* 保持圖片比例並填滿容器 */
+    /* 上方圓角已由 property-card__container 的 overflow: hidden 處理 */
+}
+
+/* 狀態標籤容器 (property-card__status-badges) */
+.property-card__status-badges {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    /* 垂直堆疊標籤 */
+    gap: 5px;
+    /* 標籤間距 */
+}
+
+
+/* 狀態標籤 (property-card__status-badge) */
+.property-card__status-badge {
+    color: #FFFFFF;
+    /* 文字顏色：白色 */
+    padding: 5px 10px;
+    /* 內邊距 */
+    border-radius: 4px;
+    /* 圓角 */
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.property-card__status-badge--sale {
+    background-color: #28A745;
+    /* 深綠色 (FOR SALE) */
+}
+
+.property-card__status-badge--rent {
+    background-color: #17A2B8;
+    /* 深綠色 (FOR RENT) - 改用稍有區別的藍綠色 */
+}
+
+.property-card__status-badge--featured {
+    background-color: #FFC107;
+    /* 黃色 (FEATURED) */
+    color: #212529;
+    /* FEATURED 文字用深色更清晰 */
+}
+
+
+/* 內容區域 (property-card__content) */
+.property-card__content {
+    padding: 20px;
+    /* 內邊距 */
+    flex-grow: 1;
+    /* 使內容區域填滿剩餘空間 */
+    display: flex;
+    flex-direction: column;
+}
+
+/* 名稱與價格容器 (property-card__name-price-wrapper) */
+.property-card__name-price-wrapper {
+    display: flex;
+    justify-content: space-between;
+    /* 名稱靠左，價格靠右 */
+    align-items: flex-start;
+    /* 頂部對齊 */
+    margin-bottom: 10px;
+    gap: 10px;
+    /* 名稱與價格之間的最小間距 */
+}
+
+/* 房源名稱 (property-card__name) */
+.property-card__name {
+    font-size: 1.25rem;
+    /* 字體大小適中 */
+    font-weight: bold;
+    /* 加粗 */
+    color: #343A40;
+    /* 深灰色 */
+    margin: 0;
+    flex-grow: 1;
+    /* 允許名稱佔用更多空間 */
+}
+
+/* 價格 (property-card__price) */
+.property-card__price {
+    font-size: 1.2rem;
+    /* 字體稍大 */
+    font-weight: bold;
+    /* 加粗 */
+    color: #FD7E14;
+    /* 橘紅色 */
+    white-space: nowrap;
+    /* 防止價格換行 */
+}
+
+.property-card__price-period {
+    font-size: 0.8rem;
+    font-weight: normal;
+    color: #6C757D;
+}
+
+
+/* 地點 (property-card__location) */
+.property-card__location {
+    font-size: 0.9rem;
+    color: #6C757D;
+    /* 灰色文字 */
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+/* 房源規格列表 (property-card__specs) */
+.property-card__specs {
+    display: flex;
+    flex-wrap: wrap;
+    /* 允許換行 */
+    gap: 15px;
+    /* 項目間距 */
+    margin-top: auto;
+    /* 將規格推到底部 */
+    padding-top: 10px;
+    /* 與上方內容的間距 */
+    border-top: 1px solid #EEEEEE;
+    /* 分隔線 */
+}
+
+/* 規格項 (property-card__spec-item) */
+.property-card__spec-item {
+    font-size: 0.9rem;
+    color: #6C757D;
+    /* 灰色文字 */
+    display: flex;
+    align-items: center;
+}
+
+/* 圖標佔位符 (property-card__icon-placeholder) */
+.property-card__icon-placeholder {
+    margin-right: 8px;
+    /* 圖標與文字的間距 */
+    font-style: italic;
+    /* 標示為佔位符 */
+}
+
+/* 導航箭頭 (carousel-arrow) */
+.carousel-arrow {
+    position: absolute;
+    /* 絕對定位 */
+    top: 50%;
+    /* 垂直置中 */
+    transform: translateY(-50%);
+    /* 精確垂直置中 */
+    background-color: rgba(255, 255, 255, 0.8);
+    /* 背景色，帶透明度 */
+    border: 1px solid #DDDDDD;
+    color: #333333;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    /* 圓形按鈕 */
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    /* 確保在卡片之上 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.carousel-arrow:hover {
+    background-color: #FD7E14;
+    color: #FFFFFF;
+    border-color: #FD7E14;
+}
+
+.carousel-arrow:disabled {
+    /* 箭頭禁用時的樣式 */
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* 左箭頭 (carousel-arrow--prev) */
+.carousel-arrow--prev {
+    left: -20px;
+    /* 位於輪播容器左側，可調整 */
+}
+
+/* 右箭頭 (carousel-arrow--next) */
+.carousel-arrow--next {
+    right: -20px;
+    /* 位於輪播容器右側，可調整 */
+}
+
+/* 分頁指示點 (carousel-pagination) */
+.carousel-pagination {
+    display: flex;
+    justify-content: center;
+    /* 水平置中 */
+    margin-top: 30px;
+    /* 與輪播內容的間距 */
+}
+
+/* 單個分頁指示點 (carousel-pagination__dot) */
+.carousel-pagination__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    /* 圓點 */
+    background-color: #D1D1D1;
+    /* 預設顏色 */
+    margin: 0 5px;
+    /* 圓點間距 */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* 過渡效果 */
+}
+
+.carousel-pagination__dot:hover {
+    background-color: #AAAAAA;
+}
+
+/* 當前頁對應的圓點 (carousel-pagination__dot--active) */
+.carousel-pagination__dot--active {
+    background-color: #FD7E14;
+    /* 作用中顏色 */
+}
+
+
+/* 響應式設計 (RWD) */
+
+/* 中螢幕 (Tablet, 576px - 991px) */
+@media (max-width: 991.98px) {
+    .homes-for-you-section {
+        padding: 50px 15px;
+    }
+
+    .homes-for-you-section__title {
+        font-size: 2rem;
+    }
+
+    .property-card {
+        /* 顯示2張卡片 */
+        flex-basis: calc(100% / 2 - (30px * 1 / 2));
+    }
+
+    .homes-for-you-section__carousel-wrapper {
+        margin: 0 -10px;
+    }
+
+    .homes-for-you-section__carousel-track {
+        padding: 0 10px;
+    }
+
+    .carousel-arrow--prev {
+        left: -15px;
+    }
+
+    .carousel-arrow--next {
+        right: -15px;
+    }
+}
+
+/* 小螢幕 (Mobile, < 576px) */
+@media (max-width: 575.98px) {
+    .homes-for-you-section {
+        padding: 40px 10px;
+    }
+
+    .homes-for-you-section__title {
+        font-size: 1.8rem;
+    }
+
+    .homes-for-you-section__subtitle {
+        font-size: 0.9rem;
+    }
+
+    .property-card {
+        /* 顯示1張卡片 */
+        flex-basis: calc(100% / 1);
+        /* max-width: calc(100% - 20px); */
+        /* 卡片寬度接近100% (減去左右邊距) */
+        /* margin: 0 auto 30px auto; 卡片水平置中並保持下方間距 */
+    }
+
+    .homes-for-you-section__carousel-track {
+        gap: 20px;
+        /* 在行動裝置上減少卡片間距 */
+        padding: 0 5px;
+    }
+
+    .homes-for-you-section__carousel-wrapper {
+        margin: 0;
+        /* 在行動裝置上移除負邊距 */
+    }
+
+    .carousel-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+
+    .carousel-arrow--prev {
+        left: 5px;
+        /* 調整箭頭位置，使其在卡片邊緣 */
+    }
+
+    .carousel-arrow--next {
+        right: 5px;
+        /* 調整箭頭位置 */
+    }
+
+    .property-card__name {
+        font-size: 1.1rem;
+    }
+
+    .property-card__price {
+        font-size: 1.1rem;
+    }
+
+    .property-card__content {
+        padding: 15px;
+    }
+
+    .property-card__specs {
+        gap: 10px;
+    }
+}
