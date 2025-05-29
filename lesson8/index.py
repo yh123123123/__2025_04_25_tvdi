@@ -27,7 +27,8 @@ def new():
         conn=psycopg2.connect(conn_string)
         #raise Exception("出現錯誤")
         with conn.cursor() as cur:
-            sql="SELECT * FROM 最新訊息"
+            sql="""SELECT * FROM public.最新訊息
+                   ORDER BY 上版日期 DESC"""
             cur.execute(sql)
             # 取得所有資料
             rows=cur.fetchall()
