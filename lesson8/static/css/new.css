@@ -1,357 +1,156 @@
-/* --- 基本樣式 --- */
-/* 這是CSS檔案的開頭，用於設定一些全域或基本樣式 */
-body {
-    font-family: 'Helvetica Neue', Arial, 'PingFang TC', '蘋方-繁', 'Microsoft JhengHei', '微軟正黑體', sans-serif;
-    /* 設定通用字體，優先使用系統預設的無襯線字體 */
-    line-height: 1.6;
-    /* 設定行高，提升閱讀性 */
-    margin: 0;
-    /* 移除 body 的預設外邊距 */
-    padding: 20px;
-    /* 頁面內邊距，方便預覽組件 */
-    background-color: #f0f2f5;
-    /* 淡雅的背景色，讓組件更突出 */
-    color: #333;
-    /* 主要文字顏色 */
-}
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
 
-/* --- 公告區塊樣式 --- */
-/* announcement-section 定義了整個公告區域的容器樣式 */
-.announcement-section {
-    background-color: #ffffff;
-    /* 白色背景 */
-    border: 1px solid #e0e0e0;
-    /* 較柔和的邊框色 */
-    padding: 20px 25px;
-    /* 上下20px，左右25px的內邊距 */
-    margin-bottom: 25px;
-    /* 與下方內容的間距 */
-    border-radius: 6px;
-    /* 稍大的圓角，增加現代感 */
-    text-align: left;
-    /* 公告內容預設靠左對齊 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    /* 細微的陰影效果，增加層次感 */
-}
+        .page-container {
+            /* Renamed from 'container' to avoid conflict if accordion is placed in a generic 'container' */
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-/* announcement-header 定義了公告標題行的樣式 */
-.announcement-header {
-    margin-bottom: 8px;
-    /* 標題與日期的間距 */
-}
+        /* --- Accordion CSS (複製貼上第 3.1 節的 CSS) --- */
+        .accordion-container {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            /* font-family: Arial, sans-serif; /* Already set on body */
+        }
 
-/* announcement-tag 強調「公告」二字 */
-.announcement-tag {
-    font-weight: bold;
-    /* 加粗「公告」標籤 */
-    color: #c0392b;
-    /* 使用較為醒目的紅色系作為標籤顏色 */
-    margin-right: 5px;
-    /* 標籤與標題文字的間距 */
-}
+        .accordion-item {
+            border-bottom: 1px solid #eee;
+        }
 
-/* announcement-title 設定公告的標題文字樣式 */
-.announcement-title {
-    font-weight: bold;
-    /* 標題文字加粗 */
-    font-size: 1.15em;
-    /* 標題字體稍大，使其更突出 */
-    color: #2c3e50;
-    /* 深藍灰色，穩重且易讀 */
-}
+        .accordion-item:last-child {
+            border-bottom: none;
+        }
 
-/* announcement-date 設定日期的樣式 */
-.announcement-date {
-    font-size: 0.88em;
-    /* 日期字體稍小 */
-    color: #7f8c8d;
-    /* 中等灰色，不至於太搶眼 */
-    margin-bottom: 12px;
-    /* 日期與內容的間距 */
-}
+        .accordion-header {
+            background-color: #f7f7f7;
+            color: #333;
+            cursor: pointer;
+            padding: 15px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
 
-/* announcement-content 設定公告主要內容的樣式 */
-.announcement-content {
-    font-size: 1em;
-    /* 內容字體大小 */
-    color: #34495e;
-    /* 比主要文字顏色稍淺，但仍保持良好對比度 */
-    line-height: 1.7;
-    /* 增加內容行高，提升易讀性 */
-}
+        .accordion-header:hover {
+            background-color: #e9e9e9;
+        }
 
+        .accordion-header .accordion-title {
+            flex-grow: 1;
+            margin-right: 10px;
+            white-space: normal;
+            word-wrap: break-word;
+        }
 
-/* --- 手風琴區塊樣式 (Accordion) --- */
-/* accordion-container 是手風琴效果的整體容器 */
-.accordion-container {
-    max-width: 760px;
-    /* 手風琴最大寬度，使其在桌面瀏覽器上不會過寬 */
-    margin: 0 auto 30px auto;
-    /* 水平置中，下方保留一些間距 */
-    border: 1px solid #d1d5da;
-    /* GitHub 風格的邊框顏色 */
-    border-radius: 6px;
-    /* 圓角 */
-    overflow: hidden;
-    /* 避免子元素（如最後一項的邊框）超出圓角範圍 */
-    background-color: #ffffff;
-    /* 背景設為白色 */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-    /* 細微陰影 */
-}
+        .accordion-header .accordion-date {
+            font-size: 0.9em;
+            color: #666;
+            white-space: nowrap;
+        }
 
-/* accordion-item 代表每一個可展開/收合的項目 */
-.accordion-item {
-    border-bottom: 1px solid #d1d5da;
-    /* 項目之間的分隔線 */
-}
+        .accordion-item.is-open .accordion-header {
+            background-color: #e0e0e0;
+        }
 
-.accordion-item:last-child {
-    border-bottom: none;
-    /* 最後一個項目移除底部分隔線，避免雙重邊框 */
-}
+        .accordion-header::after {
+            content: '+';
+            font-size: 1.2em;
+            color: #777;
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
 
-/* accordion-header 是每個項目的標題，也是觸發展開/收合的按鈕 */
-.accordion-header {
-    background-color: #f6f8fa;
-    /* GitHub 風格的標題背景色 */
-    color: #24292e;
-    /* GitHub 風格的標題文字顏色 */
-    cursor: pointer;
-    /* 滑鼠指標改為手型，提示可點擊 */
-    padding: 15px 20px;
-    /* 內邊距，提供足夠的點擊區域 */
-    width: 100%;
-    /* 寬度充滿父容器 */
-    text-align: center;
-    /* 文字置中，根據需求 */
-    border: none;
-    /* 移除按鈕預設邊框 */
-    outline: none;
-    /* 移除點擊時的輪廓，可自行設計 :focus-visible 樣式 */
-    font-size: 1.1em;
-    /* 字體大小 */
-    font-weight: 500;
-    /* 中等粗細的字體 */
-    transition: background-color 0.2s ease-in-out;
-    /* 背景色過渡效果，使交互更平滑 */
-    display: flex;
-    /* 使用 flex 以便於對齊文字和圖示 */
-    justify-content: center;
-    /* 預設將標題文字和圖示（如果有的話）一起置中 */
-    align-items: center;
-    /* 垂直居中對齊 */
-    position: relative;
-    /* 設定相對定位，為絕對定位的圖示提供參考 */
-}
+        .accordion-item.is-open .accordion-header::after {
+            content: '-';
+            transform: rotate(180deg);
+        }
 
-/* accordion-header 的滑鼠懸停效果 */
-.accordion-header:hover {
-    background-color: #f0f2f5;
-    /* 滑鼠懸停時背景色變淺 */
-}
+        .accordion-content {
+            padding: 0 15px;
+            background-color: white;
+            overflow: hidden; /* 內容超出固定高度時會被隱藏 */
+            /* max-height: 0; */ /* 預設隱藏 */
+            height: 0;
+            /* transition: max-height 0.3s ease-out, padding-top 0.3s ease-out, padding-bottom 0.3s ease-out; */
+            transition: height 0.3s ease-out, padding-top 0.3s ease-out, padding-bottom 0.3s ease-out;
+        }
 
-/* accordion-icon 是標題右側的展開/收合指示圖示 */
-.accordion-header .accordion-icon {
-    font-size: 0.75em;
-    /* 圖示大小 */
-    position: absolute;
-    /* 相對於 header 進行絕對定位 */
-    right: 20px;
-    /* 靠右顯示，距離右邊20px */
-    transition: transform 0.25s ease-in-out;
-    /* 圖示旋轉動畫 */
-}
+        .accordion-item.is-open .accordion-content {
+            /* max-height: 150px; */
+            height: 150px; /* 改為 height 並設定需要的固定高度值，例如 150px */
+            /* Adjust as needed for content */
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
 
-/* 使用伪元素 ::before 來產生圖示，方便用 CSS 控制 */
-.accordion-header .accordion-icon::before {
-    content: '▼';
-    /* 預設向下箭頭 (收合狀態的圖示) */
-    color: #586069;
-    /* 圖示顏色 */
-}
+        .accordion-content p {
+            margin: 0 0 10px 0;
+            line-height: 1.6;
+        }
 
-/* 當手風琴項目展開時 (aria-expanded="true")，改變圖示 */
-.accordion-header[aria-expanded="true"] .accordion-icon::before {
-    content: '▲';
-    /* 向上箭頭 (展開狀態的圖示) */
-    /* transform: rotate(180deg);  或者可以使用 transform 来旋转原图示，效果一致 */
-}
+        .accordion-content p:last-child {
+            margin-bottom: 0;
+        }
 
-/* accordion-content 是手風琴項目的內容區域 */
-.accordion-content {
-    padding: 20px 25px;
-    /* 內容區域的內邊距 */
-    background-color: #ffffff;
-    /* 內容背景色，通常與項目背景一致或稍作區分 */
-    text-align: center;
-    /* 內容文字置中，根據需求 */
-    /* display: none;  內容預設隱藏 (HTML中已用 inline style, CSS中也可控制，JS會操作此屬性) */
-    border-top: 1px solid #e1e4e8;
-    /* 內容區塊與標題間的細微分隔線 */
-}
+        /* RWD Adjustments from section 3.1 in the markdown */
+        @media (max-width: 767px) {
 
-/* accordion-content 內的段落樣式 */
-.accordion-content p {
-    margin-top: 0;
-    /* 移除段落頂部外邊距 */
-    margin-bottom: 12px;
-    /* 段落間距 */
-    font-size: 0.95em;
-    /* 內容文字大小 */
-    line-height: 1.65;
-    /* 內容行高 */
-    color: #444;
-    /* 內容文字顏色 */
-}
+            /* 手機版樣式 (螢幕寬度 < 768px) */
+            .accordion-header {
+                padding: 12px;
+                /* 調整手機版頭部 padding */
+                font-size: 15px;
+                /* 調整手機版頭部基礎字體大小 */
+            }
 
-/* accordion-content 內的圖片樣式 */
-.accordion-content img {
-    max-width: 100%;
-    /* 圖片最大寬度不超過其容器 */
-    height: auto;
-    /* 高度自動，保持圖片原始比例 */
-    display: block;
-    /* 將圖片設為區塊元素，以便使用 margin:auto 實現置中 */
-    margin: 15px auto;
-    /* 圖片上下邊距15px，左右自動 (實現水平置中) */
-    border-radius: 4px;
-    /* 圖片可選圓角 */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    /* 為圖片添加細微陰影，使其更立體 (可選) */
-}
+            .accordion-header .accordion-title {
+                margin-right: 8px;
+                /* 調整標題與日期之間的間距 */
+            }
 
-/* --- 響應式設計 (RWD) 中斷點 --- */
-/* RWD 設計，確保在不同螢幕尺寸下都能良好顯示 */
+            .accordion-header .accordion-date {
+                font-size: 0.85em;
+                /* 相對於新的 header font-size，或設為絕對值 */
+            }
 
-/* 大型設備 (例如桌上型電腦，螢幕寬度小於等於 992px 時生效) */
-@media (max-width: 992px) {
+            .accordion-header::after {
+                /* 圖標 */
+                font-size: 1.1em;
+                /* 調整圖標大小 */
+                margin-left: 8px;
+                /* 調整圖標與日期之間的間距 */
+            }
 
-    /* 當螢幕寬度小於992px時，手風琴容器寬度調整為90%，增加頁面呼吸空間 */
-    .accordion-container {
-        max-width: 90%;
-    }
+            .accordion-item.is-open .accordion-content {
+                /* max-height: 150px; /* 手機版內容最大高度，可根據需求調整。若字體或行高變化，此值可能需不同於桌面版以維持相似行數 */
+                padding-top: 12px;
+                /* 調整手機版內容 padding */
+                padding-bottom: 12px;
+            }
 
-    /* 調整公告標題與手風琴標題的字體大小 */
-    .announcement-title,
-    .accordion-header {
-        font-size: 1.1em;
-    }
+            .accordion-content {
+                padding: 0 12px;
+                /* 調整手機版內容左右 padding */
+            }
 
-    .announcement-section,
-    .accordion-header,
-    .accordion-content {
-        padding-left: 20px;
-        /* 調整內邊距 */
-        padding-right: 20px;
-    }
-}
-
-/* 中型設備 (例如平板電腦，螢幕寬度小於等於 768px 時生效) */
-@media (max-width: 768px) {
-
-    /* 頁面整體內邊距縮小 */
-    body {
-        padding: 15px;
-    }
-
-    /* 手風琴容器寬度進一步調整為95%，更貼合螢幕 */
-    .accordion-container {
-        max-width: 95%;
-    }
-
-    /* 調整公告相關字體大小 */
-    .announcement-title {
-        font-size: 1.05em;
-    }
-
-    .announcement-content,
-    .accordion-content p {
-        font-size: 0.92em;
-    }
-
-    /* 調整手風琴標題字體與內邊距 */
-    .accordion-header {
-        font-size: 1em;
-        padding: 12px 15px;
-    }
-
-    /* 調整圖示位置與大小 */
-    .accordion-header .accordion-icon {
-        right: 15px;
-        font-size: 0.7em;
-    }
-
-    /* 調整公告區與手風琴內容區的內邊距 */
-    .announcement-section,
-    .accordion-content {
-        padding: 15px;
-    }
-}
-
-/* 小型設備 (例如手機，螢幕寬度小於等於 576px 時生效) */
-@media (max-width: 576px) {
-
-    /* 頁面整體內邊距再次縮小 */
-    body {
-        padding: 10px;
-    }
-
-    /* 公告區塊在小螢幕上的排版調整 */
-    .announcement-header {
-        display: flex;
-        /* 使用 flex 佈局 */
-        flex-direction: column;
-        /* 垂直排列標籤和標題 */
-        align-items: flex-start;
-        /* 左對齊 */
-    }
-
-    .announcement-tag {
-        margin-bottom: 4px;
-        /* 標籤和標題之間的微小間距 */
-    }
-
-    .announcement-title {
-        font-size: 1em;
-        /* 手機上公告標題字體 */
-    }
-
-    .announcement-date {
-        font-size: 0.8em;
-        /* 手機上日期字體 */
-        margin-bottom: 10px;
-    }
-
-    .announcement-content,
-    .accordion-content p {
-        font-size: 0.88em;
-        /* 手機上內容字體 */
-    }
-
-    /* 手風琴標題在手機上的樣式調整 */
-    .accordion-header {
-        font-size: 0.95em;
-        padding: 10px 12px;
-        /* 進一步縮小內邊距 */
-        /* 在小螢幕上，標題文字可能需要靠左對齊，圖示仍在右邊，可按需調整 justify-content */
-        /* justify-content: space-between; */
-        /* 例如，若希望文字靠左，圖示靠右 */
-    }
-
-    /* 手風琴圖示位置與大小調整 */
-    .accordion-header .accordion-icon {
-        right: 12px;
-        font-size: 0.65em;
-    }
-
-    /* 手風琴內容區內邊距調整 */
-    .accordion-content {
-        padding: 12px 15px;
-    }
-
-    /* 公告區塊內邊距調整 */
-    .announcement-section {
-        padding: 12px 15px;
-    }
-}
+            .accordion-content p {
+                font-size: 14px;
+                /* 調整手機版內容字體大小 */
+                line-height: 1.5;
+                /* 調整手機版內容行高 */
+            }
+        }
