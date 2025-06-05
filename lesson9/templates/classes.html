@@ -6,27 +6,156 @@
 {% block link %}
 {{super()}}
 <link rel="stylesheet" href="{{url_for('static', filename='css/classes.css')}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 {% endblock %}
 
 
 {%block main%}
-<div class="ai-section-container">
-    <div class="ai-image-column"> <img src="{{url_for('static', filename='images/classes1.png')}}" alt="教育核心理念示意圖">
+<div class="course-tabs">
+    <div class="tab-container">
+        <button class="tab-item active" data-tab="general">一般課程</button>
+        <button class="tab-item" data-tab="advanced">進階課程</button>
     </div>
-    <div class="ai-text-column">
-        <h2>教育的核心理念-{{name}}-{{weekdays[0]}}報告</h2>
-        <ul>
-            <li><span class="star-icon">☆</span> 以學生為中心 (Student-centered Learning)</li>
-            <li><span class="star-icon">☆</span> 全人發展 (Holistic Development)</li>
-            <li><span class="star-icon">☆</span> 適性揚才 (Catering to Individual Talents)</li>
-            <li><span class="star-icon">☆</span> 終身學習 (Lifelong Learning)</li>
-            <li><span class="star-icon">☆</span> 核心素養 (Core Competencies)</li>
-        </ul>
-        <ul>
-            {%for day in weekdays%}
-            <li>{{day}}</li>
-            {%endfor%}
-        </ul>
+    <div class="tab-line"></div>
+</div>
+<script src="{{ url_for('static',filename='js/classes.js')}}"></script>
+
+
+<div class="card-grid-container">
+    <div class="card-grid">
+        <!-- 卡片 1 -->
+        <div class="card">
+            <div class="card-icon">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">課程時間</h3>
+                <p class="card-description">彈性安排課程時間，配合您的工作和生活節奏。提供多種時段選擇，讓學習更加便利。</p>
+            </div>
+        </div>
+
+        <!-- 卡片 2 -->
+        <div class="card">
+            <div class="card-icon">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">優質師資</h3>
+                <p class="card-description">經驗豐富的專業講師團隊，具備豐富的實務經驗與教學熱忱，提供最佳的學習體驗。</p>
+            </div>
+        </div>
+
+        <!-- 卡片 3 -->
+        <div class="card">
+            <div class="card-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                </svg>
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">實務應用</h3>
+                <p class="card-description">結合理論與實務，透過案例分析和實作練習，讓您能夠立即應用所學知識到工作中。</p>
+            </div>
+        </div>
+
+        <!-- 卡片 4 -->
+        <div class="card">
+            <div class="card-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">小班教學</h3>
+                <p class="card-description">採用小班制教學方式，確保每位學員都能獲得充分的關注和指導，提升學習效果。</p>
+            </div>
+        </div>
+
+        <!-- 卡片 5 -->
+        <div class="card">
+            <div class="card-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14,2 14,8 20,8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <polyline points="10,9 9,9 8,9" />
+                </svg>
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">證書認證</h3>
+                <p class="card-description">完成課程後可獲得正式結業證書，為您的專業能力提供有力證明，增加職場競爭力。</p>
+            </div>
+        </div>
+
+        <!-- 卡片 6 -->
+        <div class="card">
+            <div class="card-icon">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                    <polyline points="3.27,6.96 12,12.01 20.73,6.96" />
+                    <line x1="12" y1="22.08" x2="12" y2="12" />
+                </svg>
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">線上資源</h3>
+                <p class="card-description">提供豐富的線上學習資源，包括錄影回放、練習題庫和參考資料，隨時隨地持續學習。</p>
+            </div>
+        </div>
     </div>
 </div>
+<script>
+    // 卡片 hover 效果增強
+    document.addEventListener('DOMContentLoaded', function () {
+        const cards = document.querySelectorAll('.card');
+
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.transform = 'translateY(-4px)';
+                this.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.15)';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+            });
+        });
+    });
+
+    // 響應式調整函數
+    function handleResize() {
+        const container = document.querySelector('.card-grid-container');
+        const cards = document.querySelectorAll('.card');
+
+        if (window.innerWidth <= 480) {
+            cards.forEach(card => {
+                card.style.flexDirection = 'column';
+                card.style.textAlign = 'center';
+            });
+        } else {
+            cards.forEach(card => {
+                card.style.flexDirection = 'row';
+                card.style.textAlign = 'left';
+            });
+        }
+    }
+
+    // 監聽視窗大小變化
+    window.addEventListener('resize', handleResize);
+
+    // 初始化
+    handleResize();
+</script>
 {%endblock%}

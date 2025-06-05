@@ -1,249 +1,236 @@
-/* --- 基本設定 --- */
 body {
-    font-family: Arial, sans-serif;
-    /* 設定通用字體 */
+    font-family: 'Inter', sans-serif;
+    /* 假設 Inter 字體已載入 */
     margin: 0;
-    /* 移除 body 預設邊距 */
     padding: 20px;
-    /* 給 body 一些內邊距方便預覽 */
-    background-color: #f4f4f4;
-    /* 背景色方便預覽 */
+    /* 方便預覽 */
+    background-color: #f0f0f0;
+    /* 方便預覽 */
 }
 
-.ai-section-container {
-    /* 主要容器，使用 Flexbox 排列子元素 */
+.course-tabs {
+    max-width: 1174px;
+    width: 100%;
+    /* 可調整為 100% 適應容器 */
+    margin: 0 auto;
+    /* 置中 */
+}
+
+.tab-container {
     display: flex;
-    align-items: center;
-    /* 垂直居中對齊 (當圖片和文字區塊高度不同時) */
-    justify-content: center;
-    /* 水平居中內容 (如果容器本身不是滿版) */
-    flex-wrap: wrap;
-    /* 允許換行，響應式佈局基礎 */
+    height: 53px;
+}
+
+.tab-item {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.21;
+    padding: 12px 29px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    color: #000000;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+    /* 加入轉場效果 */
+}
+
+.tab-item.active {
+    background-color: #C3C1C1;
+}
+
+.tab-item:not(.active) {
+    background-color: #E8E6E6;
+}
+
+/* Hover 效果 */
+.tab-item.active:hover {
+    background-color: #B5B3B3;
+}
+
+.tab-item:not(.active):hover {
+    background-color: #D0CECE;
+}
+
+/* 點擊反饋 (可選) */
+.tab-item:active {
+    transform: scale(0.98);
+    /* 輕微縮放 */
+}
+
+.tab-line {
+    width: 100%;
+    height: 1px;
+    background-color: #000000;
+}
+
+
+/* ----card----- */
+
+.card-grid-container {
+    max-width: 1129px;
+    margin: 0 auto;
+    padding: 64px;
     background-color: #ffffff;
-    /* 區塊背景色 */
-    padding: 20px;
-    /* 內邊距 */
     border-radius: 8px;
-    /* 圓角 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* 微陰影效果 */
-    max-width: 1200px;
-    /* 設定最大寬度，使其在超大螢幕上不會過寬 */
-    margin: 20px auto;
-    /* 使整個容器在頁面上居中 (如果 body 是 flex 容器則不需要) */
 }
 
-/* --- 圖片欄位設定 --- */
-.ai-image-column {
-    /* 圖片欄 */
-    flex: 1 1 40%;
-    /* flex-grow, flex-shrink, flex-basis (大約佔 40% 寬度) */
-    padding: 15px;
-    /* 圖片欄內邊距 */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 64px;
+    align-items: start;
+}
+
+.card {
     display: flex;
-    /* 使用 flex 使圖片居中 */
-    justify-content: center;
-    /* 水平居中圖片 */
+    gap: 24px;
+    align-items: flex-start;
+    background-color: #ffffff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
     align-items: center;
-    /* 垂直居中圖片 */
-    min-width: 280px;
-    /* 最小寬度，避免過度壓縮 */
+    justify-content: center;
 }
 
-.ai-image-column img {
-    /* 圖片本身，確保響應式和居中 */
-    max-width: 100%;
-    /* 最大寬度為其容器寬度 */
-    height: auto;
-    /* 高度自動，保持圖片比例 */
-    display: block;
-    /* 消除圖片底部多餘空間 */
-    border-radius: 8px;
-    /* 圖片圓角 */
+.card-icon svg {
+    width: 26.67px;
+    height: 26.67px;
+    stroke: #1E1E1E;
+    stroke-width: 3px;
+    fill: none;
 }
 
-/* --- 文字內容欄位設定 --- */
-.ai-text-column {
-    /* 文字內容欄 */
-    flex: 1 1 55%;
-    /* flex-grow, flex-shrink, flex-basis (大約佔 55% 寬度) */
-    padding: 20px;
-    /* 文字欄內邊距 */
+.card-content {
+    flex: 1;
     display: flex;
-    /* 使用 flex 佈局內部元素 */
     flex-direction: column;
-    /* 垂直排列標題和列表 */
-    justify-content: center;
-    /* 垂直居中內容 (如果需要) */
-    align-items: center;
-    /* 水平居中標題和列表區塊 */
-    min-width: 280px;
-    /* 最小寬度 */
+    gap: 8px;
 }
 
-.ai-text-column h2 {
-    /* 標題文字樣式 */
-    font-size: 1.8em;
-    /* 標題字體大小 */
-    color: #333;
-    /* 標題顏色 */
-    margin-top: 0;
-    /* 移除預設的上邊距 */
-    margin-bottom: 20px;
-    /* 標題和列表之間的間距 */
-    text-align: center;
-    /* 標題文字本身居中 */
-}
-
-.ai-text-column ul {
-    /* 無序列表樣式 */
-    list-style: none;
-    /* 移除預設的項目符號 */
-    padding: 0;
-    /* 移除預設的內邊距 */
+.card-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #1E1E1E;
     margin: 0;
-    /* 移除預設的外邊距 */
-    width: fit-content;
-    /* 使 ul 的寬度剛好包住內容，方便 align-items: center 作用 */
-    text-align: left;
-    /* 列表項目的文字預設靠左對齊 */
 }
 
-.ai-text-column li {
-    /* 列表項目樣式 */
-    font-size: 1em;
-    /* 列表項目字體大小 */
-    color: #555;
-    /* 列表項目文字顏色 */
-    margin-bottom: 12px;
-    /* 列表項目之間的間距 */
-    display: flex;
-    /* 使用 flexbox 對齊圖標和文字 */
-    align-items: center;
-    /* 垂直居中圖標和文字 */
+.card-description {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #757575;
+    margin: 0;
 }
 
-.ai-text-column li:last-child {
-    margin-bottom: 0;
-    /* 最後一個列表項目移除底部間距 */
-}
-
-.star-icon {
-    /* 星星圖標樣式 */
-    margin-right: 10px;
-    /* 圖標和文字之間的間距 */
-    color: #FFC107;
-    /* 星星圖標顏色 (類似金色) */
-    font-size: 1.2em;
-    /* 圖標大小 */
-}
-
-/* --- 響應式設計：中斷點 --- */
-
-/* 中斷點 1: 當螢幕寬度小於等於 992px (例如：平板電腦) */
-@media (max-width: 991.98px) {
-    .ai-section-container {
-        flex-direction: column;
-        /* 改為垂直堆疊排列 */
-        align-items: center;
-        /* 堆疊時，讓子項目水平居中 */
+/* ----card----- */
+/* 平板版響應式設計 */
+@media (max-width: 1023px) and (min-width: 768px) {
+    .card-grid-container {
+        padding: 48px 32px;
     }
 
-    .ai-image-column,
-    .ai-text-column {
-        flex-basis: auto;
-        /* 讓寬度自動，不再遵循之前的百分比 */
-        width: 90%;
-        /* 設定一個適合的寬度 */
-        max-width: 500px;
-        /* 設定最大寬度，避免在平板上過寬 */
-        margin-bottom: 20px;
-        /* 堆疊時增加一些間距 */
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
     }
 
-    .ai-text-column {
-        align-items: center;
-        /* 確保文字區塊內容在堆疊時仍然居中 */
+    .card-title {
+        font-size: 20px;
     }
 
-    .ai-text-column ul {
-        /* 在較小螢幕，若希望列表文字也居中，可以取消註解下一行 */
-        /* text-align: center; */
-        /* 或讓列表項目內的文字也居中 */
-        /* align-self: center; */
-        /* 讓ul本身在父容器中居中*/
-    }
-
-    .ai-text-column h2 {
-        font-size: 1.6em;
-        /* 調整標題大小 */
-    }
-
-    .ai-text-column li {
-        font-size: 0.95em;
-        /* 調整列表文字大小 */
+    .card-description {
+        font-size: 14px;
     }
 }
 
-/* 中斷點 2: 當螢幕寬度小於等於 768px (例如：大型手機或小型平板直立) */
+
+
+
+
+
+
+/* RWD 響應式設計 */
+
+/* 手機版 (<768px) */
 @media (max-width: 767.98px) {
-    .ai-section-container {
-        padding: 15px;
-        /* 調整整體內邊距 */
+    .course-tabs {
+        /* 容器寬度已是 100% */
     }
 
-    .ai-image-column,
-    .ai-text-column {
-        width: 95%;
-        /* 寬度調整 */
+    .tab-item {
+        font-size: 18px;
+        padding: 8px 20px;
     }
 
-    .ai-text-column h2 {
-        font-size: 1.5em;
-        /* 進一步調整標題大小 */
+    /* 標籤可能需要垂直排列或允許水平捲動 - 此處示範水平捲動 */
+    .tab-container {
+        overflow-x: auto;
+        /* 允許水平捲動 */
+        -webkit-overflow-scrolling: touch;
+        /* iOS 慣性捲動 */
     }
 
-    .ai-text-column li {
-        font-size: 0.9em;
-        /* 進一步調整列表文字大小 */
+    /* ----card------ */
+    @media (max-width: 767px) {
+        .card-grid-container {
+            padding: 32px 16px;
+        }
+
+        .card-grid {
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .card {
+            gap: 16px;
+        }
+
+        .card-title {
+            font-size: 18px;
+        }
+
+        .card-description {
+            font-size: 14px;
+        }
     }
+
 }
 
-/* 中斷點 3: 當螢幕寬度小於等於 576px (例如：一般手機) */
-@media (max-width: 575.98px) {
-    body {
-        padding: 10px;
-        /* 調整 body 內邊距 */
+/* ----card---- */
+
+/* 極小螢幕調整 */
+@media (max-width: 480px) {
+    .card-grid-container {
+        padding: 24px 12px;
     }
 
-    .ai-section-container {
-        padding: 10px;
-        /* 調整整體內邊距 */
+    .card {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
     }
 
-    .ai-image-column,
-    .ai-text-column {
-        width: 100%;
-        /* 讓內容幾乎佔滿螢幕寬度 */
-        padding-left: 10px;
-        /* 調整欄位內邊距 */
-        padding-right: 10px;
-    }
-
-    .ai-text-column h2 {
-        font-size: 1.3em;
-        /* 再調整標題大小 */
-    }
-
-    .ai-text-column li {
-        font-size: 0.85em;
-        /* 再調整列表文字大小 */
-        margin-bottom: 10px;
-        /* 調整列表項目間距 */
-    }
-
-    .star-icon {
-        margin-right: 8px;
-        /* 調整圖標間距 */
+    .card-icon {
+        align-self: center;
     }
 }
