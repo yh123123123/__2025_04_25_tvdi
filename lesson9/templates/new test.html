@@ -1,0 +1,68 @@
+{% extends "layout/base.html" %}
+{% block title %}
+職能發展學院-最新訊息
+{% endblock %}
+
+{% block link %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='css/new.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='js/new.js')}}">
+{% endblock %}
+
+{%block main%}
+<h1>{{self.title()}}</h1>
+
+
+<div class="announcement-section">
+    <div class="announcement-header">
+        <span class="announcement-tag">【公告】</span>
+        <span class="announcement-title">本學院因改建工程，自111年2月1日起至改建工程竣工期間，暫停受理停車使用申請。</span>
+    </div>
+    <div class="announcement-date">2022-01-19</div>
+    <div class="announcement-content">
+        公告本學院因應大樓及學員宿舍用地改建及先期樹木移植、變電站遷移等工程，考量院區人員及公共安全，自111年2月1日起至改建工程竣工期間，暫停受理學員、外聘與監評人員及月租車停車使用申請。
+    </div>
+</div>
+
+<div class="accordion-container">
+    <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false" aria-controls="content1">
+            Title
+            <span class="accordion-icon"></span> </button>
+        <div id="content1" class="accordion-content" style="display: none;">
+            <p>這裡是第一個項目的內容。文字已置中。</p>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false" aria-controls="content2">
+            Title
+            <span class="accordion-icon"></span>
+        </button>
+        <div id="content2" class="accordion-content" style="display: none;">
+            <p>這裡是第二個項目的內容。文字已置中。</p>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false" aria-controls="content3">
+            Title
+            <span class="accordion-icon"></span>
+        </button>
+        <div id="content3" class="accordion-content" style="display: none;">
+            <p>這裡是第三個項目的內容。文字已置中。</p>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false" aria-controls="content4">
+            Title
+            <span class="accordion-icon"></span>
+        </button>
+        <div id="content4" class="accordion-content" style="display: none;">
+            <p>這裡是第四個項目的內容。文字已置中。</p>
+        </div>
+    </div>
+</div>
+
+{%endblock%}

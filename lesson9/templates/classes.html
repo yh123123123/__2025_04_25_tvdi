@@ -1,0 +1,32 @@
+{% extends "layout/base.html" %}
+{% block title %}
+職能發展學院-課程規劃
+{% endblock %}
+
+{% block link %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='css/classes.css')}}">
+{% endblock %}
+
+
+{%block main%}
+<div class="ai-section-container">
+    <div class="ai-image-column"> <img src="{{url_for('static', filename='images/classes1.png')}}" alt="教育核心理念示意圖">
+    </div>
+    <div class="ai-text-column">
+        <h2>教育的核心理念-{{name}}-{{weekdays[0]}}報告</h2>
+        <ul>
+            <li><span class="star-icon">☆</span> 以學生為中心 (Student-centered Learning)</li>
+            <li><span class="star-icon">☆</span> 全人發展 (Holistic Development)</li>
+            <li><span class="star-icon">☆</span> 適性揚才 (Catering to Individual Talents)</li>
+            <li><span class="star-icon">☆</span> 終身學習 (Lifelong Learning)</li>
+            <li><span class="star-icon">☆</span> 核心素養 (Core Competencies)</li>
+        </ul>
+        <ul>
+            {%for day in weekdays%}
+            <li>{{day}}</li>
+            {%endfor%}
+        </ul>
+    </div>
+</div>
+{%endblock%}
