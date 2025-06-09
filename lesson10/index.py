@@ -29,7 +29,8 @@ def classes():
             cur.execute(sql)
             temps=cur.fetchall()
             kinds=[kind[0] for kind in temps]
-            print(kinds)
+            kinds.reverse()
+            conn.close()
     return render_template('classes.html',kinds=kinds)
 
 @app.route("/new")
