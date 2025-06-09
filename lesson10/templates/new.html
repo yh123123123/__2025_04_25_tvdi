@@ -1,0 +1,42 @@
+{% extends "layout/base.html" %}
+{% block title %}
+職能發展學院-最新訊息
+{% endblock %}
+
+
+{% block link %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='css/new.css')}}">
+{% endblock %}
+
+
+
+{%block main%}
+<h1>{{self.title()}}</h1>
+
+<div class="page-container">
+
+    <div class="accordion-container">
+        {%for row in rows%}
+        <div class="accordion-item {% if loop.first %} is-open {% endif %} ">
+            <button class="accordion-header" aria-expanded="true" aria-controls="accordion-content-1"
+                id="accordion-header-1">
+                <span class="accordion-title">{{loop.index~'. '~row[1]}}</span>
+                <span class="accordion-date">{{row[2].strftime("%Y-%m-%d")}}</span>
+            </button>
+            <div class="accordion-content" role="region" aria-labelledby="accordion-header-1" id="accordion-content-1">
+                {% if row[3] is not none %}
+                {% for line in row[3].split("\n") %}
+                <p>{{line}}</p>
+                {% endfor %}
+                {% else %}
+                <p>沒有資料</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script src="{{url_for('static', filename='js/new.js')}}"></script>
+
+{%endblock%}
