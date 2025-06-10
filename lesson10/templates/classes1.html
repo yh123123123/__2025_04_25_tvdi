@@ -17,8 +17,7 @@
 <div class="course-tabs">
     <div class="tab-container">
         {% for kind in kinds%}
-        <a href="/classes/{{'一般課程' if loop.first else '進階課程'}}"><button class="tab-item {{'active' if loop.first}}"
-                data-tab="general">{{kind}}</button></a>
+        <button class="tab-item {{'active' if loop.first}}" data-tab="general">{{kind}}</button>
         {% endfor%}
         <!-- -->
         <!-- <button class="tab-item active" data-tab="general">{{kinds[0]}}</button>
@@ -31,35 +30,28 @@
 <script src="{{ url_for('static',filename='js/classes.js')}}"></script>
 
 
-
 <div class="card-grid-container">
     <div class="card-grid">
-        {% for course in course_data %}
         <!-- 卡片 1 -->
+
+
         <div class="card">
+            <div class="card-icon">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+            </div>
             <div class="card-content">
-                <h3 class="card-title">{{course[0]}}</h3>
-                <p class="card-description">{{course[1]}}</p>
-                <p class="card-description">{{course[2]}}</p>
-                <p class="card-description">{{course[6]}}</p>
-                <p class="card-description">{{course[5]}}</p>
+                <h3 class="card-title">課程時間</h3>
+                <p class="card-description">彈性安排課程時間，配合您的工作和生活節奏。提供多種時段選擇，讓學習更加便利。</p>
             </div>
         </div>
-        {% endfor %}
+
+
     </div>
+
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 <script>
     // 卡片 hover 效果增強
     document.addEventListener('DOMContentLoaded', function () {
