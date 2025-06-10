@@ -53,7 +53,7 @@ def classes(course_types):
         """
         cur.execute(sql_course)
         course_data = cur.fetchall()
-        print(course_data)
+        conn.close()
 
     return render_template("classes.html",kinds=kinds,course_data=course_data)
 
