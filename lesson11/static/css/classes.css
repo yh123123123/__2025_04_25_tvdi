@@ -123,6 +123,15 @@ body {
     gap: 8px;
 }
 
+.card-content p {
+    text-indent: 1.5em;
+    /* 縮排效果 */
+    border-left: 2px solid #ccc;
+    /* 垂直隔線 */
+    padding-left: 3px;
+    /* 隔線與文字的間距 */
+}
+
 .card-title {
     font-family: 'Inter', sans-serif;
     font-weight: 600;
