@@ -1,0 +1,387 @@
+ /* --- 整體基本設定 --- */
+ body {
+     font-family: Arial, sans-serif;
+     /* 設定通用字體 */
+     margin: 0;
+     padding: 0;
+     background-color: #ffffff;
+     /* 背景色，可依主要網頁調整 */
+     text-align: center;
+     /* 文字預設置中 */
+ }
+
+ /* --- 主要容器 --- */
+ .event-section {
+     width: 100%;
+     max-width: 1200px;
+     /* 最大寬度，可依主要網頁調整 */
+     padding: 20px;
+     box-sizing: border-box;
+ }
+
+ /* --- 主標題 --- */
+ .event-main-title {
+     font-size: 2.5em;
+     /* 主標題字體大小 */
+     color: #333;
+     /* 主標題顏色 */
+     margin-top: 20px;
+     margin-bottom: 5px;
+ }
+
+ /* --- 副標題/日期 --- */
+ .event-subtitle {
+     font-size: 1em;
+     /* 副標題字體大小 */
+     color: #777;
+     /* 副標題顏色 */
+     margin-bottom: 30px;
+ }
+
+ /* --- 卡片容器 --- */
+ .event-card-container {
+     display: flex;
+     /* 卡片水平排列 (若有多張卡片) */
+     justify-content: center;
+     /* 卡片水平置中 */
+     flex-wrap: wrap;
+     /* 自動換行 */
+     gap: 20px;
+     /* 卡片間距 */
+ }
+
+ /* --- 單一事件卡片 --- */
+ .event-card {
+     background-color: #fff;
+     /* 卡片背景色 */
+     border-radius: 8px;
+     /* 卡片圓角 */
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     /* 卡片陰影 */
+     width: 100%;
+     /* 預設寬度，將在中斷點調整 */
+     max-width: 500px;
+     /* 卡片最大寬度，避免過大 */
+     overflow: hidden;
+     /* 隱藏超出圓角的內容 */
+     text-align: center;
+     /* 卡片內文字置中 */
+     position: relative;
+     /* 相對定位，供標籤使用 */
+     margin-bottom: 20px;
+     /* 卡片底部間距 */
+ }
+
+ /* --- 地點標籤 --- */
+ .event-tag {
+     position: absolute;
+     /* 絕對定位 */
+     top: 15px;
+     /* 距離頂部 */
+     left: 15px;
+     /* 距離左側 */
+     background-color: #28a745;
+     /* 標籤背景色 (綠色參考) */
+     color: white;
+     /* 標籤文字顏色 */
+     padding: 5px 10px;
+     /* 標籤內距 */
+     border-radius: 5px;
+     /* 標籤圓角 */
+     font-size: 0.9em;
+     /* 標籤字體大小 */
+     z-index: 1;
+     /* 確保在圖片之上 */
+ }
+
+ /* --- 卡片圖片 --- */
+ .event-image {
+     width: 100%;
+     /* 圖片寬度充滿卡片 */
+     height: auto;
+     /* 圖片高度自動 */
+     display: block;
+     /* 去除圖片底部多餘空間 */
+     object-fit: cover;
+     /* 圖片裁剪以填滿容器 */
+     max-height: 300px;
+     /* 圖片最大高度，可自行調整 */
+ }
+
+ /* --- 卡片內容 (文字標題) --- */
+ .event-card-content {
+     padding: 20px;
+     /* 內容區域內距 */
+ }
+
+ .event-card-title {
+     font-size: 1.5em;
+     /* 卡片標題字體大小 */
+     color: #333;
+     /* 卡片標題顏色 */
+     margin-top: 0;
+     margin-bottom: 0;
+     /* 移除標題底部預設間距 */
+ }
+
+ /* --- RWD 中斷點 --- */
+
+ /* 中型裝置 (平板, 小於 992px) */
+ @media (max-width: 991.98px) {
+     .event-main-title {
+         font-size: 2.2em;
+         /* 調整主標題字體 */
+     }
+
+     .event-card {
+         max-width: 450px;
+         /* 調整卡片最大寬度 */
+     }
+ }
+
+ /* 小型裝置 (橫向手機，小於 768px) */
+ @media (max-width: 767.98px) {
+     .event-main-title {
+         font-size: 2em;
+         /* 再次調整主標題字體 */
+     }
+
+     .event-subtitle {
+         font-size: 0.9em;
+         /* 調整副標題字體 */
+     }
+
+     .event-card {
+         max-width: 100%;
+         /* 卡片寬度充滿 */
+         margin-left: 10px;
+         /* 增加左右邊距，避免貼邊 */
+         margin-right: 10px;
+     }
+
+     .event-card-title {
+         font-size: 1.3em;
+         /* 調整卡片標題字體 */
+     }
+
+     .event-tag {
+         font-size: 0.8em;
+         /* 調整標籤字體 */
+         padding: 4px 8px;
+     }
+ }
+
+ /* 超小型裝置 (直向手機，小於 576px) */
+ @media (max-width: 575.98px) {
+     .event-section {
+         padding: 10px;
+         /* 調整整體內距 */
+     }
+
+     .event-main-title {
+         font-size: 1.8em;
+         /* 更小的主標題字體 */
+     }
+
+     .event-subtitle {
+         font-size: 0.8em;
+         /* 更小的副標題字體 */
+     }
+
+     .event-card-title {
+         font-size: 1.2em;
+         /* 更小的卡片標題字體 */
+     }
+
+     .event-tag {
+         font-size: 0.75em;
+         /* 調整標籤字體 */
+         top: 10px;
+         left: 10px;
+     }
+
+     .event-card-content {
+         padding: 15px;
+         /* 調整卡片內容內距 */
+     }
+ }
+
+
+ /* --- 競賽資訊區塊整體樣式 --- */
+ .competition-info-section {
+     font-family: 'Arial', '微軟正黑體', sans-serif;
+     /* 設定通用且支援中文的字體 */
+     padding: 20px 15px;
+     /* 區塊上下邊距20px，左右邊距15px */
+     text-align: center;
+     /* 內部文字預設居中 (標題、副標題) */
+     background-color: #e8f0fb;
+     /* 設定一個輕微的背景色，可選 */
+ }
+
+ /* --- 標題樣式 --- */
+ .competition-title {
+     font-size: 28px;
+     /* 主標題字體大小 */
+     color: #333;
+     /* 主標題顏色 */
+     margin-bottom: 8px;
+     /* 主標題與副標題間距 */
+ }
+
+ /* --- 副標題樣式 --- */
+ .competition-subtitle {
+     font-size: 16px;
+     /* 副標題字體大小 */
+     color: #666;
+     /* 副標題顏色 */
+     margin-bottom: 30px;
+     /* 副標題與卡片區塊間距 */
+ }
+
+ /* --- 運動項目網格容器樣式 --- */
+ .sports-grid-container {
+     display: flex;
+     /* 啟用 Flexbox 佈局 */
+     flex-wrap: wrap;
+     /* 允許項目換行 */
+     gap: 20px;
+     /* 卡片之間的間距 (上下左右) */
+     justify-content: center;
+     /* 當卡片不足一行時，整體居中 */
+ }
+
+ /* --- 運動項目卡片樣式 --- */
+ .sport-card-item {
+     background-color: #ffffff;
+     /* 卡片背景色 */
+     border-radius: 12px;
+     /* 卡片圓角 */
+     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+     /* 卡片陰影效果 */
+     overflow: hidden;
+     /* 確保圖片的圓角裁切正確，以及內容不超出 */
+     text-align: left;
+     /* 卡片內部文字靠左 (若名稱區塊需要) */
+     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+     /* 滑鼠懸停動畫效果 */
+
+     /* --- RWD 卡片寬度設定 (桌面優先) --- */
+     /* 預設為桌面版：一行四個卡片 */
+     /* 計算方式: (100% - (欄數-1) * 間距) / 欄數 */
+     flex-basis: calc((100% - 3 * 20px) / 4);
+     flex-grow: 0;
+     /* 不允許放大 */
+     flex-shrink: 0;
+     /* 不允許縮小 (確保 basis 生效) */
+     max-width: calc((100% - 3 * 20px) / 4);
+     /* 確保最大寬度 */
+ }
+
+ .sport-card-item:hover {
+     transform: translateY(-6px);
+     /* 滑鼠懸停時卡片輕微上移 */
+     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+     /* 滑鼠懸停時陰影加深 */
+ }
+
+ /* --- 卡片圖片樣式 --- */
+ .sport-card-image {
+     width: 100%;
+     /* 圖片寬度充滿卡片 */
+     height: 200px;
+     /* 設定一個固定高度，可依設計調整 */
+     object-fit: cover;
+     /* 圖片等比例縮放並填滿容器，超出部分裁切 */
+     display: block;
+     /* 消除圖片底部可能的空白間隙 */
+ }
+
+ /* --- 卡片運動名稱樣式 --- */
+ .sport-card-name {
+     padding: 12px 15px;
+     /* 名稱區塊內邊距 */
+     font-size: 18px;
+     /* 運動名稱字體大小 */
+     font-weight: 600;
+     /* 字體略粗 */
+     color: #333;
+     /* 名稱文字顏色 */
+     text-align: center;
+     /* 運動名稱文字居中 */
+ }
+
+ /* --- RWD 中斷點樣式調整 --- */
+
+ /* 中斷點 1: 平板裝置 (螢幕寬度 <= 992px) */
+ @media (max-width: 992px) {
+     .competition-title {
+         font-size: 26px;
+         /* 調整平板標題大小 */
+     }
+
+     .competition-subtitle {
+         font-size: 15px;
+         /* 調整平板副標題大小 */
+     }
+
+     .sport-card-item {
+         /* 一行顯示兩個卡片 */
+         flex-basis: calc((100% - 1 * 20px) / 2);
+         max-width: calc((100% - 1 * 20px) / 2);
+     }
+
+     .sport-card-image {
+         height: 180px;
+         /* 調整平板圖片高度 */
+     }
+
+     .sport-card-name {
+         font-size: 17px;
+         /* 調整平板名稱字體大小 */
+     }
+ }
+
+ /* 中斷點 2: 手機裝置 (螢幕寬度 <= 576px) */
+ @media (max-width: 576px) {
+     .competition-info-section {
+         padding: 15px 10px;
+         /* 調整手機區塊邊距 */
+     }
+
+     .competition-title {
+         font-size: 22px;
+         /* 調整手機標題大小 */
+     }
+
+     .competition-subtitle {
+         font-size: 14px;
+         /* 調整手機副標題大小 */
+         margin-bottom: 20px;
+         /* 調整手機副標題與卡片間距 */
+     }
+
+     .sports-grid-container {
+         gap: 15px;
+         /* 調整手機卡片間距 */
+     }
+
+     .sport-card-item {
+         /* 一行顯示一個卡片 */
+         flex-basis: 100%;
+         /* 佔滿整行寬度 */
+         max-width: 100%;
+     }
+
+     .sport-card-image {
+         height: 160px;
+         /* 調整手機圖片高度 */
+     }
+
+     .sport-card-name {
+         font-size: 16px;
+         /* 調整手機名稱字體大小 */
+         padding: 10px 12px;
+         /* 調整手機名稱區塊內邊距 */
+     }
+ }

@@ -1,0 +1,161 @@
+/* style.css */
+:root {
+    /* Colors */
+    --color-text: #000000;
+    --color-active-bg: #C3C1C1;
+    --color-inactive-bg: #E8E6E6;
+    --color-underline: #000000;
+    --color-button-hover-bg: #d0cece;
+    /* Slightly darker for hover on inactive */
+
+    /* Typography */
+    --font-family: 'Inter', sans-serif;
+    /* Use Inter Medium (weight 500) */
+    --font-weight-medium: 500;
+    --line-height: 1.21;
+
+    /* Sizing & Spacing - Desktop */
+    --desktop-component-width: 1174px;
+    --desktop-tab-font-size: 24px;
+    --desktop-tab-padding: 12px 29px;
+    --desktop-tab-height: 53px;
+
+    /* Sizing & Spacing - Mobile */
+    --mobile-tab-font-size: 18px;
+    --mobile-tab-padding: 10px 20px;
+    /* The RWD spec for "間距適配" mentions 8px 16px,
+       but "手機版 (Mobile) - RWD 規範" for "標籤內距" says 10px 20px.
+       Using 10px 20px as it's more specific to tab padding. */
+
+    /* Border */
+    --tab-border-radius: 15px;
+    --underline-height: 1px;
+
+    /* Transitions */
+    --transition-duration: 0.2s;
+}
+
+body {
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    /* For better visualization of the component */
+    line-height: 1.5;
+}
+
+h1,
+#output p {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#selectedCategoryText {
+    font-weight: bold;
+    color: #007bff;
+}
+
+
+.course-category-tabs-wrapper {
+    display: flex;
+    justify-content: center;
+    /* Centers the component when it has a fixed width */
+    width: 100%;
+}
+
+.course-category-tabs {
+    width: 100%;
+    /* Mobile first: full width */
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-container {
+    display: flex;
+    width: 100%;
+}
+
+.tab-button {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+    line-height: var(--line-height);
+    border: none;
+    /* Remove default border */
+    border-radius: var(--tab-border-radius) var(--tab-border-radius) 0 0;
+    /* Top-left and top-right corners */
+    background-color: var(--color-inactive-bg);
+    cursor: pointer;
+    outline: none;
+    /* Remove default focus outline, manage focus styles if needed for accessibility */
+    transition: background-color var(--transition-duration) ease-in-out;
+    text-align: center;
+    /* Ensures text is centered within the button */
+
+    /* Mobile styles (default) */
+    font-size: var(--mobile-tab-font-size);
+    padding: var(--mobile-tab-padding);
+    flex-grow: 1;
+    /* Mobile: 標籤等寬分布 */
+    flex-basis: 0;
+    /* Distribute space evenly among items when flex-grow is 1 */
+}
+
+.tab-button.active {
+    background-color: var(--color-active-bg);
+    font-weight: var(--font-weight-medium);
+    /* Ensure active tab also uses medium weight */
+}
+
+.tab-button:not(.active):hover {
+    background-color: var(--color-button-hover-bg);
+}
+
+.tab-underline {
+    height: var(--underline-height);
+    background-color: var(--color-underline);
+    width: 100%;
+    /* Takes full width of .course-category-tabs */
+}
+
+/* Tablet styles (between mobile and desktop breakpoints) */
+/* Using 768px as the lower bound for "larger screen" styles, applies desktop font/padding but still full width */
+@media (min-width: 768px) {
+    .tab-button {
+        font-size: var(--desktop-tab-font-size);
+        padding: var(--desktop-tab-padding);
+        flex-grow: 0;
+        /* Desktop: "自動分布" - allow natural width, don't force equal width */
+        /* Ensure button height matches spec: 53px */
+        /* Calculated height: (12px padding-top) + (24px font-size * 1.21 line-height ~= 29.04px) + (12px padding-bottom) ~= 53.04px */
+        min-height: var(--desktop-tab-height);
+        /* Explicitly set min-height */
+        height: var(--desktop-tab-height);
+        /* Explicitly set height */
+        box-sizing: border-box;
+        /* Include padding and border in the element's total width and height */
+    }
+
+    .tab-container {
+        /* For "自動分布" on desktop, if tabs don't fill the container, they'll align to the start.
+           If a specific gap is needed, 'gap' property can be used, or margins on buttons.
+           The current setup will have them adjacent. */
+    }
+}
+
+/* Desktop styles */
+@media (min-width: 1024px) {
+    .course-category-tabs {
+        width: var(--desktop-component-width);
+        max-width: 100%;
+        /* Ensure it doesn't overflow viewport if parent is narrower */
+    }
+
+    /* Tab button styles (font-size, padding, height) are already inherited from the (min-width: 768px) query */
+}
+
+/* Accessibility: Add focus indicator for keyboard navigation if default outline is removed */
+.tab-button:focus-visible {
+    box-shadow: 0 0 0 2px var(--color-text) inset;
+    /* Example focus style */
+}

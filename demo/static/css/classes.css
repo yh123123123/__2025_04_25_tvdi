@@ -1,0 +1,291 @@
+body {
+    font-family: 'Inter', sans-serif;
+    /* 假設 Inter 字體已載入 */
+    margin: 0;
+    padding: 20px;
+    /* 方便預覽 */
+    background-color: #f0f0f0;
+    /* 方便預覽 */
+}
+
+.course-tabs {
+    max-width: 1174px;
+    width: 100%;
+    /* 可調整為 100% 適應容器 */
+    margin: 0 auto;
+    /* 置中 */
+}
+
+.tab-container {
+    display: flex;
+    height: 53px;
+}
+
+.tab-item {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.21;
+    padding: 12px 29px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    color: #000000;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+    /* 加入轉場效果 */
+}
+
+.tab-item.active {
+    background-color: #C3C1C1;
+}
+
+.tab-item:not(.active) {
+    background-color: #E8E6E6;
+}
+
+/* Hover 效果 */
+.tab-item.active:hover {
+    background-color: #B5B3B3;
+}
+
+.tab-item:not(.active):hover {
+    background-color: #D0CECE;
+}
+
+/* 點擊反饋 (可選) */
+.tab-item:active {
+    transform: scale(0.98);
+    /* 輕微縮放 */
+}
+
+.tab-line {
+    width: 100%;
+    height: 1px;
+    background-color: #000000;
+}
+
+
+/* ----card----- */
+
+.card-grid-container {
+    max-width: 1129px;
+    margin: 0 auto;
+    padding: 64px;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 64px;
+    align-items: start;
+}
+
+.card {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    background-color: #ffffff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-icon svg {
+    width: 26.67px;
+    height: 26.67px;
+    stroke: #1E1E1E;
+    stroke-width: 3px;
+    fill: none;
+}
+
+.card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.card-content p {
+    text-indent: 1.5em;
+    /* 縮排效果 */
+    border-left: 2px solid #ccc;
+    /* 垂直隔線 */
+    padding-left: 3px;
+    /* 隔線與文字的間距 */
+}
+
+.card-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #1E1E1E;
+    margin: 0;
+}
+
+.card-description {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #757575;
+    margin: 0;
+}
+
+
+
+/* ----card----- */
+/* 平板版響應式設計 */
+@media (max-width: 1023px) and (min-width: 768px) {
+    .card-grid-container {
+        padding: 48px 32px;
+    }
+
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+    }
+
+    .card-title {
+        font-size: 20px;
+    }
+
+    .card-description {
+        font-size: 14px;
+    }
+}
+
+
+
+
+
+
+
+/* RWD 響應式設計 */
+
+/* 手機版 (<768px) */
+@media (max-width: 767.98px) {
+    .course-tabs {
+        /* 容器寬度已是 100% */
+    }
+
+    .tab-item {
+        font-size: 18px;
+        padding: 8px 20px;
+    }
+
+    /* 標籤可能需要垂直排列或允許水平捲動 - 此處示範水平捲動 */
+    .tab-container {
+        overflow-x: auto;
+        /* 允許水平捲動 */
+        -webkit-overflow-scrolling: touch;
+        /* iOS 慣性捲動 */
+    }
+
+    /* ----card------ */
+    @media (max-width: 767px) {
+        .card-grid-container {
+            padding: 32px 16px;
+        }
+
+        .card-grid {
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .card {
+            gap: 16px;
+        }
+
+        .card-title {
+            font-size: 18px;
+        }
+
+        .card-description {
+            font-size: 14px;
+        }
+    }
+
+}
+
+/* ----card---- */
+
+/* 極小螢幕調整 */
+@media (max-width: 480px) {
+    .card-grid-container {
+        padding: 24px 12px;
+    }
+
+    .card {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .card-icon {
+        align-self: center;
+    }
+}
+
+/* 分頁樣式 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    /* 水平置中 */
+    list-style: none;
+    /* 移除列表點 */
+    padding: 0;
+    margin-top: 20px;
+    /* 與上方內容的間距 */
+}
+
+.pagination li {
+    margin: 0 5px;
+    /* 頁碼之間的間距 */
+}
+
+.pagination li a,
+.pagination li span {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #495057; /* 深灰色 */
+    border: 1px solid #adb5bd; /* 淺灰色邊框 */
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination li.active span {
+    background-color: #6c757d; /* 中灰色背景 */
+    color: white;
+    border-color: #6c757d; /* 中灰色邊框 */
+}
+
+.pagination li.disabled span {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #e9ecef;
+}
+
+.pagination li a:hover:not(.active) {
+    background-color: #e9ecef;
+}
