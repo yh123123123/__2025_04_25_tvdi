@@ -1,5 +1,4 @@
 requests
-Flask
 psycopg[binary]
 psycopg2-binary
 python-dotenv
@@ -7,11 +6,11 @@ pandas
 numpy
 matplotlib
 seaborn
-tensorflow
 scikit-learn
 joblib
-gunicorn
-
+Flask==2.3.3
+tensorflow==2.10.1
+gunicorn==21.2.0
 
 
 
