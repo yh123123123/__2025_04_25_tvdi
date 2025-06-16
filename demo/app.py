@@ -1,4 +1,5 @@
-# app.py
+import matplotlib
+matplotlib.use('Agg')
 import os
 import joblib
 import pandas as pd
