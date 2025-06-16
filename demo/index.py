@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 import os
 from dotenv import load_dotenv
 import psycopg2
@@ -44,42 +44,18 @@ def classes(course_types):
             "報名開始日期",
             "報名結束日期",
             "課程內容",
-            "進修費用",
-            "群組",
-            "進修時數",
-            "上課時間",
-            "課程開始日期"
+            "進修費用"
         FROM
             "進修課程"
         WHERE
             "課程類別" = '{course_types}'
+        LIMIT 6;
         """
-
-        page = request.args.get('page', 1, type=int)  # 從網址參數取得頁碼，預設1
-        per_page = 6
-
-        # 執行 SQL 抓所有資料（示意）
         cur.execute(sql_course)
-        all_items = cur.fetchall()  # 取得全部資料（33筆）
+        course_data = cur.fetchall()
+        conn.close()
 
-        total = len(all_items)
-        total_pages = (total + per_page - 1) // per_page  # 計算總頁數
-
-        start = (page - 1) * per_page
-        end = start + per_page
-        items = all_items[start:end]  # 取得該頁資料
-
-        # 將 items 賦值給 course_data，因為 items 包含了當前頁的課程資料
-        course_data = items 
-
-        return render_template("classes.html",kinds=kinds,course_data=course_data,course_types=course_types, page=page, total_pages=total_pages)
-
-        # cur.execute(sql_course,(course_types))
-        # cur.execute(sql_course)
-        # course_data = cur.fetchall()
-        # conn.close()
- 
-    # return render_template("classes.html",kinds=kinds,course_data=course_data)
+    return render_template("classes.html",kinds=kinds,course_data=course_data)
 
 @app.route("/new")
 def new():

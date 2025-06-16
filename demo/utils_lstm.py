@@ -3,8 +3,15 @@ import pandas as pd
 import numpy as np
 
 def load_and_clean_data(file_paths):
-    """從多個 CSV 檔案路徑載入、合併並清理資料。"""
-    dfs = [pd.read_csv(file) for file in file_paths]
+    """
+    從多個 CSV 檔案路徑載入、合併並清理資料。
+    """
+    try:
+        dfs = [pd.read_csv(file) for file in file_paths]
+    except FileNotFoundError as e:
+        print(f"❌ 錯誤：找不到檔案 {e.filename}。請確認路徑是否正確。")
+        return None
+
     df = pd.concat(dfs, ignore_index=True)
     
     df.columns = df.columns.str.strip()
@@ -17,7 +24,9 @@ def load_and_clean_data(file_paths):
     return df[['Date', 'Price']]
 
 def create_lstm_sequences(data, sequence_length):
-    """將數據轉換為 LSTM 適用的序列格式。"""
+    """
+    將數據轉換為 LSTM 適用的序列格式 (samples, time steps, features)。
+    """
     X, y = [], []
     for i in range(sequence_length, len(data)):
         X.append(data[i-sequence_length:i, 0])
@@ -26,4 +35,3 @@ def create_lstm_sequences(data, sequence_length):
     X, y = np.array(X), np.array(y)
     X = np.reshape(X, (X.shape[0], X.shape[1], 1))
     return X, y
-

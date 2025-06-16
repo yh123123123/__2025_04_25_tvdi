@@ -1,4 +1,7 @@
-# app.py
+
+import matplotlib
+matplotlib.use('Agg')  # <-- 關鍵！設定非 GUI 後端，必須在 pyplot import 之前
+
 import os
 import joblib
 import pandas as pd
@@ -18,7 +21,7 @@ from utils_lstm import load_and_clean_data, create_lstm_sequences
 
 # --- App 初始化與設定 ---
 app = Flask(__name__)
-app.secret_key = 'supersecretkey'  # 用於 flash 訊息
+app.secret_key = 'supersecretkey'
 
 # 設定上傳資料夾和模型路徑
 UPLOAD_FOLDER = 'uploads'
@@ -33,7 +36,24 @@ MODEL_PATH = os.path.join(MODEL_DIR, "lstm_gold_predictor.h5")
 SCALER_PATH = os.path.join(MODEL_DIR, "lstm_scaler.pkl")
 SEQUENCE_LENGTH = 60
 
-# --- 基礎與導覽路由 ---
+# 在啟動時載入模型、Scaler 和數據
+try:
+    model = load_model(MODEL_PATH)
+    scaler = joblib.load(SCALER_PATH)
+    all_data_files = [os.path.join(DATA_DIR, f) for f in os.listdir(DATA_DIR) if f.endswith('.csv')]
+    # 如果 data 資料夾是空的，不要報錯，讓使用者可以透過網頁上傳
+    if all_data_files:
+        full_df = load_and_clean_data(all_data_files).set_index('Date')
+    else:
+        full_df = pd.DataFrame(columns=['Price']).set_index(pd.to_datetime([])) # 創建一個空的 DataFrame
+    print("✅ 模型、Scaler 和歷史數據已成功載入。")
+except Exception as e:
+    print(f"⚠️ 啟動時載入模型或數據失敗 (可能是首次啟動): {e}")
+    model = None
+    scaler = None
+    full_df = pd.DataFrame(columns=['Price']).set_index(pd.to_datetime([]))
+
+# --- 路由設定 ---
 @app.route('/')
 def index():
     return redirect(url_for('predict_page'))
@@ -48,6 +68,10 @@ def train_page():
             flash('錯誤：未選擇任何檔案。', 'danger')
             return redirect(request.url)
         
+        # 清空舊的訓練數據
+        for f in os.listdir(DATA_DIR):
+            os.remove(os.path.join(DATA_DIR, f))
+            
         for file in files:
             if file and file.filename.endswith('.csv'):
                 filename = secure_filename(file.filename)
@@ -60,11 +84,11 @@ def train_page():
             train_files = [os.path.join(DATA_DIR, f) for f in os.listdir(DATA_DIR)]
             price_data = load_and_clean_data(train_files)
             
-            scaler = MinMaxScaler(feature_range=(0, 1))
-            scaled_prices = scaler.fit_transform(price_data['Price'].values.reshape(-1, 1))
+            scaler_instance = MinMaxScaler(feature_range=(0, 1))
+            scaled_prices = scaler_instance.fit_transform(price_data['Price'].values.reshape(-1, 1))
             X_train, y_train = create_lstm_sequences(scaled_prices, SEQUENCE_LENGTH)
 
-            model = Sequential([
+            model_instance = Sequential([
                 LSTM(units=50, return_sequences=True, input_shape=(X_train.shape[1], 1)),
                 Dropout(0.2),
                 LSTM(units=50, return_sequences=False),
@@ -72,11 +96,11 @@ def train_page():
                 Dense(units=25),
                 Dense(units=1)
             ])
-            model.compile(optimizer='adam', loss='mean_squared_error')
-            model.fit(X_train, y_train, epochs=25, batch_size=32, verbose=0)
+            model_instance.compile(optimizer='adam', loss='mean_squared_error')
+            model_instance.fit(X_train, y_train, epochs=25, batch_size=32, verbose=0)
             
-            model.save(MODEL_PATH)
-            joblib.dump(scaler, SCALER_PATH)
+            model_instance.save(MODEL_PATH)
+            joblib.dump(scaler_instance, SCALER_PATH)
             
             flash('模型訓練成功，並已儲存！', 'success')
         except Exception as e:
@@ -101,26 +125,36 @@ def test_page():
             file.save(test_filepath)
             
             try:
-                model = load_model(MODEL_PATH)
-                scaler = joblib.load(SCALER_PATH)
+                model_test = load_model(MODEL_PATH)
+                scaler_test = joblib.load(SCALER_PATH)
                 
-                train_files = [os.path.join(DATA_DIR, f) for f in os.listdir(DATA_DIR)]
+                train_files = [os.path.join(DATA_DIR, f) for f in os.listdir(DATA_DIR) if f.endswith('.csv')]
                 df_hist = load_and_clean_data(train_files)
                 df_new_test = load_and_clean_data([test_filepath])
                 
+                # 準備測試數據
                 test_input_data = pd.concat([df_hist.tail(SEQUENCE_LENGTH), df_new_test], ignore_index=True)
-                scaled_test_prices = scaler.transform(test_input_data['Price'].values.reshape(-1, 1))
+                scaled_test_prices = scaler_test.transform(test_input_data['Price'].values.reshape(-1, 1))
+                
+                # 建立測試序列
                 X_test, y_test_scaled = create_lstm_sequences(scaled_test_prices, SEQUENCE_LENGTH)
                 
-                y_pred_scaled = model.predict(X_test)
-                y_pred = scaler.inverse_transform(y_pred_scaled)
-                y_test = scaler.inverse_transform(y_test_scaled.reshape(-1, 1))
+                # #############  START: 新增的錯誤檢查 #############
+                if len(X_test) == 0:
+                    flash(f"錯誤：測試檔案 '{filename}' 的數據筆數太少，無法生成任何一個完整的測試序列（需要 > {SEQUENCE_LENGTH} 筆數據）。", 'danger')
+                    return render_template('test.html', result=None)
+                # #############  END: 新增的錯誤檢查 #############
+
+                # 進行預測
+                y_pred_scaled = model_test.predict(X_test)
+                y_pred = scaler_test.inverse_transform(y_pred_scaled)
+                y_test = scaler_test.inverse_transform(y_test_scaled.reshape(-1, 1))
                 
                 mae = mean_absolute_error(y_test, y_pred)
                 rmse = np.sqrt(mean_squared_error(y_test, y_pred))
 
                 # 生成圖表
-                plt.figure(figsize=(10, 5))
+                fig = plt.figure(figsize=(10, 5))
                 plt.plot(df_new_test['Date'], y_test, 'b-o', label='真實價格')
                 plt.plot(df_new_test['Date'], y_pred, 'r--x', label='預測價格')
                 plt.title(f"'{filename}' 測試結果")
@@ -128,9 +162,9 @@ def test_page():
                 plt.grid(True)
                 
                 buf = BytesIO()
-                plt.savefig(buf, format="png")
+                fig.savefig(buf, format="png")
                 plot_data = base64.b64encode(buf.getbuffer()).decode("ascii")
-                plt.close()
+                plt.close(fig)
 
                 return render_template('test.html', result={'mae': f'{mae:.2f}', 'rmse': f'{rmse:.2f}', 'plot': plot_data})
 
@@ -142,24 +176,26 @@ def test_page():
 # --- 3. 預測明日價格功能 ---
 @app.route('/predict', methods=['GET', 'POST'])
 def predict_page():
+    if model is None:
+        flash('模型尚未訓練，請先前往「訓練模型」頁面進行訓練。', 'warning')
+        return render_template('predict.html', error="模型未載入")
+        
+    latest_date = full_df.index.max().strftime('%Y-%m-%d') if not full_df.empty else ""
+
     if request.method == 'POST':
         target_date_str = request.form.get('date')
         if not target_date_str:
             flash('請選擇一個基準日期。', 'warning')
-            return redirect(url_for('predict_page'))
+            return render_template('predict.html', latest_date=latest_date)
 
         try:
-            model = load_model(MODEL_PATH)
-            scaler = joblib.load(SCALER_PATH)
-            train_files = [os.path.join(DATA_DIR, f) for f in os.listdir(DATA_DIR)]
-            full_df = load_and_clean_data(train_files).set_index('Date')
-            
             target_date = pd.to_datetime(target_date_str)
+            
             last_60_days = full_df.loc[:target_date].tail(SEQUENCE_LENGTH)
 
             if len(last_60_days) < SEQUENCE_LENGTH:
                 flash(f"歷史數據不足（需要 {SEQUENCE_LENGTH} 天）。", "warning")
-                return redirect(url_for('predict_page'))
+                return render_template('predict.html', latest_date=latest_date)
 
             today_price = full_df.loc[target_date]['Price']
             
@@ -175,17 +211,14 @@ def predict_page():
                 'next_day': (target_date + timedelta(days=1)).strftime('%Y-%m-%d'),
                 'predicted_price': f"${predicted_price:,.2f}"
             }
-            return render_template('predict.html', result=result)
+            return render_template('predict.html', result=result, latest_date=latest_date)
 
-        except FileNotFoundError:
-            flash('模型檔案不存在，請先訓練模型。', 'danger')
         except KeyError:
             flash(f"資料庫中找不到日期 '{target_date_str}' 的價格。", 'danger')
         except Exception as e:
             flash(f'預測時發生錯誤: {e}', 'danger')
 
-    return render_template('predict.html')
-
+    return render_template('predict.html', latest_date=latest_date)
 
 if __name__ == '__main__':
     app.run(debug=True)

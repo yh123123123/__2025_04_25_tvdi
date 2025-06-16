@@ -123,15 +123,6 @@ body {
     gap: 8px;
 }
 
-.card-content p {
-    text-indent: 1.5em;
-    /* 縮排效果 */
-    border-left: 2px solid #ccc;
-    /* 垂直隔線 */
-    padding-left: 3px;
-    /* 隔線與文字的間距 */
-}
-
 .card-title {
     font-family: 'Inter', sans-serif;
     font-weight: 600;
@@ -150,8 +141,6 @@ body {
     color: #757575;
     margin: 0;
 }
-
-
 
 /* ----card----- */
 /* 平板版響應式設計 */
@@ -244,48 +233,4 @@ body {
     .card-icon {
         align-self: center;
     }
-}
-
-/* 分頁樣式 */
-.pagination {
-    display: flex;
-    justify-content: center;
-    /* 水平置中 */
-    list-style: none;
-    /* 移除列表點 */
-    padding: 0;
-    margin-top: 20px;
-    /* 與上方內容的間距 */
-}
-
-.pagination li {
-    margin: 0 5px;
-    /* 頁碼之間的間距 */
-}
-
-.pagination li a,
-.pagination li span {
-    display: block;
-    padding: 8px 12px;
-    text-decoration: none;
-    color: #495057; /* 深灰色 */
-    border: 1px solid #adb5bd; /* 淺灰色邊框 */
-    border-radius: 4px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.pagination li.active span {
-    background-color: #6c757d; /* 中灰色背景 */
-    color: white;
-    border-color: #6c757d; /* 中灰色邊框 */
-}
-
-.pagination li.disabled span {
-    color: #6c757d;
-    pointer-events: none;
-    background-color: #e9ecef;
-}
-
-.pagination li a:hover:not(.active) {
-    background-color: #e9ecef;
 }
