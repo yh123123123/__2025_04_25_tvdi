@@ -1,0 +1,36 @@
+{% extends "layout/base.html" %}
+{% block title %}
+職能發展學院-最新訊息
+{% endblock %}
+
+
+{% block link %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='css/tag.css')}}">
+{% endblock %}
+
+
+
+{%block main%}
+
+<h1>課程分類標籤組件展示</h1>
+<p>請調整瀏覽器寬度以測試響應式設計 (斷點: 768px, 1024px)。</p>
+
+<div class="course-category-tabs-wrapper">
+    <div class="course-category-tabs" id="myCourseTabs">
+        <div class="tab-container" role="tablist">
+            <button class="tab-button active" data-category="general" role="tab" aria-selected="true"
+                id="tab-general">一般課程</button>
+            <button class="tab-button" data-category="advanced" role="tab" aria-selected="false"
+                id="tab-advanced">進階課程</button>
+        </div>
+        <div class="tab-underline"></div>
+    </div>
+</div>
+
+<div id="output">
+    <p>選中的分類: <span id="selectedCategoryText">general</span></p>
+</div>
+<script src="{{url_for('static', filename='js/trg.js')}}"></script>
+
+{%endblock%}
