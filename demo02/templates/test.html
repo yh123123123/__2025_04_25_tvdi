@@ -1,21 +1,8 @@
-{% extends "layout/base.html" %}
-{% block title %}
-職能發展學院-最新訊息
-{% endblock %}
-
-
-{% block link %}
-{{super()}}
-<link rel="stylesheet" href="{{url_for('static', filename='css/new.css')}}">
-{% endblock %}
-
-
-
 {% extends 'base.html' %}
 {% block title %}測試模型{% endblock %}
 {% block content %}
 <h1>測試已儲存的模型</h1>
-<p>請上傳一個新的 CSV 檔案進行測試。程式會載入 <strong>model</strong> 資料夾中的模型，並在新數據上進行評估。</p>
+<p>請上傳一個新的 CSV 檔案進行測試。</p>
 <form method="post" enctype="multipart/form-data">
     <input type="file" name="file" required>
     <br><br>

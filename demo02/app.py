@@ -1,3 +1,4 @@
+# app.py
 import os
 import joblib
 import pandas as pd
@@ -52,7 +53,7 @@ def train_page():
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(DATA_DIR, filename))
         
-        flash(f'成功上傳 {len(files)} 個檔案到 data 資料夾。', 'info')
+        flash(f'成功上傳 {len(files)} 個檔案。', 'info')
 
         # 執行訓練
         try:

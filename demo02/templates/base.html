@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%} 職能發展學院 {%endblock%}</title>
+    {% block link%}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/base.css')}}">
+    {% endblock %}
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="{{ url_for('train_page') }}"
+            class="{{ 'active' if request.endpoint == 'train_page' else '' }}">訓練模型</a>
+        <a href="{{ url_for('test_page') }}" class="{{ 'active' if request.endpoint == 'test_page' else '' }}">測試模型</a>
+        <a href="{{ url_for('predict_page') }}"
+            class="{{ 'active' if request.endpoint == 'predict_page' else '' }}">預測價格</a>
+    </div>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class="flash-messages">
+            {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>

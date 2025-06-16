@@ -1,16 +1,5 @@
-{% extends "layout/base.html" %}
-{% block title %}
-職能發展學院-首頁
-{% endblock %}
-
-
-{% block link %}
-{{super()}}
-<link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
-{% endblock %}
-
-
-
+{% extends 'base.html' %}
+{% block title %}預測明日價格{% endblock %}
 {% block content %}
 <h1>預測明日黃金價格</h1>
 <p>請選擇一個基準日期，模型將根據該日及其之前的歷史數據預測下一天的價格。</p>
