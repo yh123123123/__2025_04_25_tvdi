@@ -15,9 +15,7 @@ tensorflow==2.12.0 # 使用一個較新但仍支援 Python 3.10 的版本
 # Plotting (for test script)
 matplotlib==3.7.2
 
-
 requests
-
 python-dotenv
 seaborn
 

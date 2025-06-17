@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}預測明日價格{% endblock %}
+{% block content %}
+<h1>預測明日黃金價格</h1>
+<p>請選擇一個基準日期，模型將根據該日及其之前的歷史數據預測下一天的價格。</p>
+<form method="post" action="{{ url_for('predict_page') }}">
+    <label for="date">基準日期：</label>
+    <input type="date" id="date" name="date" value="{{ request.form.date or latest_date }}" required>
+    <br><br>
+    <button type="submit" style="padding: 10px 20px; font-size: 16px;">預測</button>
+</form>
+
+{% if result %}
+<div class="result-box" style="margin-top: 20px; text-align: center;">
+    <h2>預測結果</h2>
+    <p style="font-size: 16px;">基準日 ({{ result.target_date }}) 收盤價：<strong>{{ result.today_price }}</strong></p>
+    <hr>
+    <p style="font-size: 20px;">預測 {{ result.next_day }} 的價格為：</p>
+    <p style="font-size: 32px; color: #d4af37; font-weight: bold;">{{ result.predicted_price }}</p>
+</div>
+{% endif %}
+{% endblock %}

@@ -189,6 +189,4 @@ def predict_page():
 
 
 if __name__ == '__main__':
-    # Hugging Face Spaces 會提供一個 PORT 環境變數
-    port = int(os.environ.get("PORT", 7860)) 
-    app.run(host="0.0.0.0", port=port, debug=True)
+    app.run(debug=True)

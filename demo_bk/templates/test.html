@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}測試模型{% endblock %}
+{% block content %}
+<h1>測試已儲存的模型</h1>
+<p>請上傳一個新的 CSV 檔案進行測試。</p>
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <br><br>
+    <button type="submit" style="padding: 10px 20px; font-size: 16px;">開始測試</button>
+</form>
+
+{% if result %}
+<div class="result-box" style="margin-top: 20px;">
+    <h2>測試結果</h2>
+    <p><strong>平均絕對誤差 (MAE):</strong> {{ result.mae }}</p>
+    <p><strong>均方根誤差 (RMSE):</strong> {{ result.rmse }}</p>
+    <img src="data:image/png;base64,{{ result.plot }}" alt="測試結果圖" style="max-width: 100%;">
+</div>
+{% endif %}
+{% endblock %}
